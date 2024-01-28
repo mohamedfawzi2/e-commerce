@@ -78,6 +78,21 @@ const Login = () => {
               </div>
             </div>
             <button className="btn btn-primary">Login</button>
+            <div className="google-btn">
+              <a href={`http://127.0.0.1:8000/login-google`}>
+                <div className="google-icon-wrapper">
+                  <img
+                    className="google-icon"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/768px-Google_Chrome_icon_%28September_2014%29.svg.png"
+                    alt="sign in with google"
+                  />
+                </div>
+                <p className="btn-text">
+                  <b>Sign in with google</b>
+                </p>
+              </a>
+            </div>
+            {err !== "" && <span className="error">{err}</span>}
           </form>
         </div>
       </div>
