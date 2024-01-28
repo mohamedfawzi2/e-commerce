@@ -18,6 +18,16 @@
     width: 960px;
   }
 }
+@media (max-width: 992px) {
+  .custom-form {
+    width: 100%;
+  }
+  .form-control input{
+    width: 100;
+  }
+}
+
+
 @media (min-width: 1200px) {
   .container {
     width: 1140px;
