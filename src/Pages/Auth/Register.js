@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { REGISTER, baseUrl } from "../../Api/Api";
 import Loading from "../../Components/Loading/Loading";
+import { Form } from "react-bootstrap";
 
 const Register = () => {
   const [form, setForm] = useState({
@@ -37,13 +38,15 @@ const Register = () => {
     <>
       {loading && <Loading />}
       <div className="container">
-        <div className="row h-100">
-          <form className="form" onSubmit={handelSubmit}>
-            <div className="custom-form">
-              <h1>SignUp</h1>
-              <div className="form-control">
-                <input
-                  id="name"
+        <div className="row " style={{ height: "100vh" }}>
+          <Form className="form" onSubmit={handelSubmit}>
+            <div className="custom-form ">
+              <h1 className="mb-3-">SignUp</h1>
+              <Form.Group
+                className="form-custom"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Control
                   type="text"
                   name="name"
                   value={form.name}
@@ -51,11 +54,14 @@ const Register = () => {
                   placeholder="Enter Your Name.."
                   required
                 />
-                <label htmlFor="name">Name</label>
-              </div>
-              <div className="form-control">
-                <input
-                  id="email"
+
+                <Form.Label>Name:</Form.Label>
+              </Form.Group>
+              <Form.Group
+                className="form-custom"
+                controlId="exampleForm.ControlInput2"
+              >
+                <Form.Control
                   type="email"
                   name="email"
                   value={form.email}
@@ -63,27 +69,48 @@ const Register = () => {
                   placeholder="Enter Your Email.."
                   required
                 />
-                <label htmlFor="email">Email</label>
-              </div>
-              <div className="form-control">
-                <input
-                  id="password"
+
+                <Form.Label>Email:</Form.Label>
+              </Form.Group>
+              <Form.Group
+                className="form-custom"
+                controlId="exampleForm.ControlInput3"
+              >
+                <Form.Control
                   type="password"
                   name="password"
                   value={form.password}
                   onChange={handelChange}
                   placeholder="Enter Your Password.."
-                  required
                   minLength={6}
+                  required
                 />
-                <label htmlFor="password">Password</label>
-              </div>
-              <button className="btn btn-primary">Register</button>
-              {err !== "" && <span className="error">{err}</span>}
+
+                <Form.Label>Password:</Form.Label>
+              </Form.Group>
             </div>
-          </form>
+
+            <button className="btn btn-primary">Submit</button>
+            <div className="google-btn">
+              <a href={`http://127.0.0.1:8000/login-google`}>
+                <div className="google-icon-wrapper">
+                  <img
+                    className="google-icon"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Google_Chrome_icon_%28September_2014%29.svg/768px-Google_Chrome_icon_%28September_2014%29.svg.png"
+                    alt="sign in with google"
+                  />
+                </div>
+                <p className="btn-text">
+                  <b>Sign in with google</b>
+                </p>
+              </a>
+            </div>
+            {err !== "" && <span className="error">{err}</span>}
+          </Form>
         </div>
       </div>
+      <button className="btn btn-primary">Register</button>
+              {err !== "" && <span className="error">{err}</span>}
     </>
   );
 };

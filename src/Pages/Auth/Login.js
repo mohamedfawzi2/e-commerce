@@ -3,6 +3,7 @@ import axios from "axios";
 import Loading from "../../Components/Loading/Loading";
 import { baseUrl, LOGIN } from "../../Api/Api";
 import Cookie from "cookie-universal";
+import Form from "react-bootstrap/Form";
 
 const Login = () => {
   const [form, setForm] = useState({
@@ -45,13 +46,15 @@ const Login = () => {
       {loading && <Loading />}
 
       <div className="container">
-        <div className="row h-100 ">
-          <form className="form" onSubmit={handelSubmit}>
+        <div className="row " style={{ height: "100vh" }}>
+          <Form className="form" onSubmit={handelSubmit}>
             <div className="custom-form ">
-              <div className="form-control">
-                <h1>Login</h1>
-                <input
-                  id="email"
+              <h1 className="mb-5">Login</h1>
+              <Form.Group
+                className="form-custom"
+                controlId="exampleForm.ControlInput1"
+              >
+                <Form.Control
                   type="email"
                   name="email"
                   value={form.email}
@@ -59,13 +62,14 @@ const Login = () => {
                   placeholder="Enter Your Email.."
                   required
                 />
-                <label htmlFor="email">Email:</label>
-              </div>
-            </div>
-            <div className="custom-form">
-              <div className="form-control">
-                <input
-                  id="password"
+
+                <Form.Label>Email:</Form.Label>
+              </Form.Group>
+              <Form.Group
+                className="form-custom"
+                controlId="exampleForm.ControlInput2"
+              >
+                <Form.Control
                   type="password"
                   name="password"
                   value={form.password}
@@ -74,9 +78,11 @@ const Login = () => {
                   minLength={6}
                   required
                 />
-                <label htmlFor="password">Password:</label>
-              </div>
+
+                <Form.Label>Password:</Form.Label>
+              </Form.Group>
             </div>
+
             <button className="btn btn-primary">Login</button>
             <div className="google-btn">
               <a href={`http://127.0.0.1:8000/login-google`}>
@@ -93,7 +99,7 @@ const Login = () => {
               </a>
             </div>
             {err !== "" && <span className="error">{err}</span>}
-          </form>
+          </Form>
         </div>
       </div>
     </>
