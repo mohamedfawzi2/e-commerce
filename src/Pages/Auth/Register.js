@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import { REGISTER, baseUrl } from "../../Api/Api";
 import Loading from "../../Components/Loading/Loading";
 import { Form } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {
+function Register() {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   // loading
   const [loading, setLoading] = useState(false);
   //err
   const [err, setErr] = useState("");
+
+  //ref
+  const focus = useRef();
+
   function handelChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
@@ -24,7 +29,7 @@ const Register = () => {
     try {
       await axios.post(`${baseUrl}/${REGISTER}`, form);
       setLoading(false);
-      window.location.pathname = "/users";
+      navigate("/dashboard/users", { replace: true });
     } catch (err) {
       setLoading(false);
       if (err.response.status === 422) {
@@ -34,6 +39,10 @@ const Register = () => {
       }
     }
   }
+  // handle foucs
+  useEffect(() => {
+    focus.current.focus();
+  }, []);
   return (
     <>
       {loading && <Loading />}
@@ -47,6 +56,7 @@ const Register = () => {
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Control
+                  ref={focus}
                   type="text"
                   name="name"
                   value={form.name}
@@ -110,9 +120,9 @@ const Register = () => {
         </div>
       </div>
       <button className="btn btn-primary">Register</button>
-              {err !== "" && <span className="error">{err}</span>}
+      {err !== "" && <span className="error">{err}</span>}
     </>
   );
-};
+}
 
 export default Register;

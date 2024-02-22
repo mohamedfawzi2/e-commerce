@@ -1,13 +1,11 @@
-import React from 'react'
 
-const Loading = () => {
+
+function Loading() {
   return (
-    <div className='spinner-container-submit'>
-      <div className='spinner'>
-
-      </div>
+    <div className="spinner-container-submit">
+      <div className="spinner"></div>
     </div>
-  )
+  );
 }
 
-export default Loading
+export default Loading;

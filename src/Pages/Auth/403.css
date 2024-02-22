@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap");
+
+.text-wrapper {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 5em;
+  font-weight: 700;
+  color: rgb(144, 71, 71);
+}
+
+.subtitles {
+  font-size: 40px;
+  font-weight: 700;
+  color: rgb(6, 72, 108);
+}

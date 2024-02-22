@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from "axios";
 import Loading from "../../Components/Loading/Loading";
 import { baseUrl, LOGIN } from "../../Api/Api";
 import Cookie from "cookie-universal";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 
-const Login = () => {
+function Login() {
   const [form, setForm] = useState({
     name: "",
     email: "",
     password: "",
   });
-
+  const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState("");
   const cookie = Cookie();
+  //ref
+  const focus = useRef();
 
   function handelChange(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -29,9 +32,11 @@ const Login = () => {
       });
       setLoading(false);
       const token = res.data.token;
-      cookie.set("e-comm", token);
+      const role = res.data.user.role;
+      const go = role === "1995" ? "users" : "writer";
+      cookie.set("e-commerce", token);
 
-      window.location.pathname = "/users";
+      window.location.pathname = `/dashboard/${go}`;
     } catch (err) {
       setLoading(false);
       if (err.response.status === 401) {
@@ -41,6 +46,10 @@ const Login = () => {
       }
     }
   }
+  // handle foucs
+  useEffect(() => {
+    focus.current.focus();
+  }, []);
   return (
     <>
       {loading && <Loading />}
@@ -55,6 +64,7 @@ const Login = () => {
                 controlId="exampleForm.ControlInput1"
               >
                 <Form.Control
+                  ref={focus}
                   type="email"
                   name="email"
                   value={form.email}
@@ -104,6 +114,6 @@ const Login = () => {
       </div>
     </>
   );
-};
+}
 
 export default Login;

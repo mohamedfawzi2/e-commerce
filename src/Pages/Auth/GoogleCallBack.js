@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import  { useEffect } from "react";
 import { GOOGLE_CALL_BACK, baseUrl } from "../../Api/Api";
 import Cookie from "cookie-universal";
 
-const GoogleCallBack = () => {
+function GoogleCallBack() {
   const cookie = Cookie();
   useEffect(() => {
     async function GoogleCall() {
@@ -18,6 +18,6 @@ const GoogleCallBack = () => {
     GoogleCall();
   }, []);
   return <div></div>;
-};
+}
 
 export default GoogleCallBack;
